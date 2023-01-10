@@ -8,9 +8,23 @@ import './App.css';
 import Die from './Components/Die';
 
 function App() {
-    const [diceNumbers, setDiceNumbers] = useState(() => [
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    ]);
+    const [diceNumbers, setDiceNumbers] = useState(allNewDice());
+
+    function allNewDice() {
+        const diceNumberArray = [];
+
+        for (let i = 0; i < 10; i++) {
+            const randomDiceNumber = Math.floor(Math.random() * 6 + 1);
+
+            diceNumberArray.push(randomDiceNumber);
+        }
+
+        return diceNumberArray;
+    }
+
+    function rollDice() {
+        setDiceNumbers(() => allNewDice());
+    }
 
     return (
         <div className="App w-full h-full">
@@ -31,6 +45,7 @@ function App() {
                     <button
                         type="button"
                         className="btn w-fit bg-accent border-accent text-white px-10"
+                        onClick={() => rollDice()}
                     >
                         Roll
                     </button>
