@@ -14,6 +14,9 @@ module.exports = {
                 warning: '#DEB617',
                 error: '#F07587',
             },
+            boxShadow: {
+                below: '0px 2px 2px rgba(0, 0, 0, 0.15)',
+            },
         },
     },
     plugins: [require('daisyui')],
