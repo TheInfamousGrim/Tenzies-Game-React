@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 
 // Css
 import './App.css';
@@ -40,22 +41,27 @@ function App() {
 
     // Roll all the dice that aren't currently being held
     function rollDice() {
-        setDice((oldDice) => {
-            const newDiceArray = [];
-            oldDice.forEach((oldDie) => {
-                oldDie.isHeld
-                    ? newDiceArray.push(oldDie)
-                    : newDiceArray.push({
-                          ...oldDie,
-                          value: Math.ceil(Math.random() * 6),
-                      });
-            });
-            return newDiceArray;
-        });
+        if (!tenzies) {
+            setDice((oldDice) =>
+                oldDice.map((oldDie) =>
+                    oldDie.isHeld
+                        ? oldDie
+                        : {
+                              ...oldDie,
+                              value: Math.ceil(Math.random() * 6),
+                          }
+                )
+            );
+        } else {
+            console.log('running');
+            setTenzies(false);
+            setDice(allNewDice());
+        }
     }
 
     return (
         <div className="App h-full flex flex-col justify-center">
+            {tenzies && <Confetti />}
             <main className="bg-secondary min-h-96 max-w-3xl my-5 mx-auto rounded flex flex-col gap-5 p-5">
                 <div>
                     <h1 className="font-bold text-3xl text-center">Tenzies</h1>
@@ -81,7 +87,7 @@ function App() {
                         className="btn w-fit bg-accent border-primary text-white px-10 active:shadow-inner active:shadow-white"
                         onClick={() => rollDice()}
                     >
-                        Roll
+                        {tenzies ? 'New Game' : 'Roll'}
                     </button>
                 </div>
             </main>
