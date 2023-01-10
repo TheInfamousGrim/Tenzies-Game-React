@@ -14,7 +14,6 @@ export default function Die({ diceNumber, isHeld, setDice, dieId }) {
                     : oldDie
             )
         );
-        console.log(isHeld);
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
 // Css
@@ -8,8 +8,11 @@ import './App.css';
 import Die from './Components/Die';
 
 function App() {
+    // State
     const [dice, setDice] = useState(allNewDice());
+    const [tenzies, setTenzies] = useState(false);
 
+    // Setup the tenzies game with random dice
     function allNewDice() {
         const diceNumberArray = [];
 
@@ -26,6 +29,16 @@ function App() {
         return diceNumberArray;
     }
 
+    // Check if the user has won the game
+    useEffect(() => {
+        // Returns true if every die isHeld and is equal
+        const checkTenzies = dice.every(
+            (die) => die.isHeld && die.value === dice[0].value
+        );
+        if (checkTenzies) return setTenzies(true);
+    }, [dice]);
+
+    // Roll all the dice that aren't currently being held
     function rollDice() {
         setDice((oldDice) => {
             const newDiceArray = [];
