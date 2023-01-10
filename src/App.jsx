@@ -26,8 +26,6 @@ function App() {
         return diceNumberArray;
     }
 
-    console.table(dice);
-
     function rollDice() {
         setDice((oldDice) => {
             const newDiceArray = [];
