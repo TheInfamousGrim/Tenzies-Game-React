@@ -12,6 +12,7 @@ function App() {
     // State
     const [dice, setDice] = useState(allNewDice());
     const [tenzies, setTenzies] = useState(false);
+    const [rolling, setRolling] = useState(false);
 
     // Setup the tenzies game with random dice
     function allNewDice() {
@@ -42,6 +43,7 @@ function App() {
     // Roll all the dice that aren't currently being held
     function rollDice() {
         if (!tenzies) {
+            setRolling(true);
             setDice((oldDice) =>
                 oldDice.map((oldDie) =>
                     oldDie.isHeld
@@ -52,6 +54,9 @@ function App() {
                           }
                 )
             );
+            setTimeout(() => {
+                setRolling(false);
+            }, 1000);
         } else {
             console.log('running');
             setTenzies(false);
@@ -77,6 +82,7 @@ function App() {
                             isHeld={die.isHeld}
                             setDice={setDice}
                             dieId={die.id}
+                            isRolling={rolling}
                             key={die.id}
                         />
                     ))}
