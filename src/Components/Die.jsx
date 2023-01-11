@@ -49,22 +49,17 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
     }
 
     return (
-        <FontAwesomeIcon
-            className={classNames(
-                isHeld ? 'text-success' : 'text-accent',
-                isRolling && !isHeld ? 'fa-shake' : '',
-                dieGeneralClasses
-            )}
-            icon={diceNumberString(diceNumber)}
-            data-die-id={dieId}
-            onClick={(e) => holdDice(e)}
-        >
-            {/* {numberOfDiceDots.map(() => (
-                <motion.div
-                    key={nanoid()}
-                    className="bg-accent h-5 w-5 rounded-full mx-auto my-auto"
-                />
-            ))} */}
-        </FontAwesomeIcon>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <FontAwesomeIcon
+                className={classNames(
+                    isHeld ? 'text-success' : 'text-accent',
+                    isRolling && !isHeld ? 'fa-shake' : '',
+                    dieGeneralClasses
+                )}
+                icon={diceNumberString(diceNumber)}
+                data-die-id={dieId}
+                onClick={(e) => holdDice(e)}
+            />
+        </motion.div>
     );
 }
