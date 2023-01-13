@@ -26,3 +26,25 @@ body {
   min-height: 100vh;
   background-color: #2b283a;
 }
+
+@layer utilities {
+  @variants responsive {
+    .text-shadow {
+      text-shadow: 0px 2.07958px 4.15917px rgba(0, 0, 0, 0.14),
+        0px 2.07958px 2.07958px rgba(0, 0, 0, 0.12),
+        0px 2.07958px 4.15917px rgba(0, 0, 0, 0.2);
+    }
+    .text-shadow-md {
+      text-shadow: 4px 4px 8px black;
+    }
+    .text-shadow-lg {
+      text-shadow: 15px 15px 30px black;
+    }
+    .text-shadow-none {
+      text-shadow: none;
+    }
+    .glow-white {
+      box-shadow: 0px 0px 21.8312px rgba(255, 255, 255, 0.44);
+    }
+  }
+}

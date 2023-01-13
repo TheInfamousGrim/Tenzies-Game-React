@@ -29,7 +29,7 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
     }
 
     const dieGeneralClasses =
-        'w-24 h-24 drop-shadow-lg mx-auto rounded-lg hover:cursor-pointer transform ease-linear';
+        'w-12 h-12 md:w-24 md:h-24 drop-shadow-lg mx-auto rounded-lg hover:cursor-pointer transform ease-linear';
 
     function diceNumberString(diceDots) {
         switch (diceDots) {
@@ -49,7 +49,13 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
     }
 
     return (
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <motion.button
+            type="button"
+            className="outline-transparent ring-transparent"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            whileFocus={{ scale: 1.1 }}
+        >
             <FontAwesomeIcon
                 className={classNames(
                     isHeld ? 'text-success' : 'text-accent',
@@ -59,7 +65,11 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
                 icon={diceNumberString(diceNumber)}
                 data-die-id={dieId}
                 onClick={(e) => holdDice(e)}
+                onKeyDown={(e) => console.log('hello')}
             />
-        </motion.div>
+            <p className="mt-4 text-base text-gray-300 sr-only">
+                {`Number on Dice: ${diceNumber.toString()}`}
+            </p>
+        </motion.button>
     );
 }
