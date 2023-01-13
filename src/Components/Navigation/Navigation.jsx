@@ -10,6 +10,9 @@ import { useDimensions } from '../../Hooks/useDimensions';
 import { MenuToggle } from './MenuToggle';
 import Divider from '../Divider';
 
+// Utility functions
+import formattedTime from '../../utils/formattedTime';
+
 // TODO: Add functionality for a high score system
 
 const sidebar = {
@@ -34,10 +37,17 @@ const sidebar = {
 
 const menuVariants = {
     open: {
+        display: 'block',
+        visibility: 'visible',
         transition: { staggerChildren: 0.07, delayChildren: 0.2 },
     },
     closed: {
-        transition: { staggerChildren: 0.05, staggerDirection: -1 },
+        display: 'none',
+        transition: {
+            staggerChildren: 0.05,
+            staggerDirection: -1,
+            when: 'afterChildren',
+        },
     },
 };
 
@@ -60,7 +70,7 @@ const menuItemsVariants = {
 
 const colors = ['#FF008C', '#D309E1', '#9C1AFF', '#7700FF', '#4400FF'];
 
-export function Navigation({ numberOfRolls }) {
+export function Navigation({ numberOfRolls, timestamp, endTime }) {
     // State
     const [isOpen, toggleOpen] = useCycle(false, true);
 
@@ -119,9 +129,14 @@ export function Navigation({ numberOfRolls }) {
                         className="text-3xl"
                         style={style}
                     />
-                    <div className="w-52 h-5 uppercase font-bold" style={style}>
-                        <p>Current Time:</p>
-                    </div>
+                    {timestamp && (
+                        <div
+                            className="w-52 h-5 uppercase font-bold"
+                            style={style}
+                        >
+                            <p>{`Time: ${formattedTime(timestamp)}`}</p>
+                        </div>
+                    )}
                 </motion.li>
                 <motion.li
                     className="list-none mb-5"

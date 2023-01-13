@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import Confetti from 'react-confetti';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 
 // Css
 import './App.css';
@@ -11,6 +13,9 @@ import Footer from './Components/Footer';
 import { Navigation } from './Components/Navigation/Navigation';
 import Modal from './Components/Modal';
 
+// Dayjs plugins
+dayjs.extend(duration);
+
 function App() {
     // State
     const [dice, setDice] = useState(allNewDice());
@@ -18,6 +23,9 @@ function App() {
     const [rolling, setRolling] = useState(false);
     const [numberOfRolls, setNumberOfRolls] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
+    const [startTime, setStartTime] = useState(dayjs());
+    const [endTime, setEndTime] = useState({});
+    const [timestamp, setTimeStamp] = useState({});
 
     // Modal open and close function
     const open = () => setModalOpen(true);
@@ -36,9 +44,12 @@ function App() {
                 isHeld: false,
             });
         }
-
         return diceNumberArray;
     }
+
+    // Create a timer that will measure how long it takes the user to get a Tenzie
+    // useMemo(() => {
+    // }, [timestamp]);
 
     // Check if the user has won the game
     useEffect(() => {
@@ -47,13 +58,41 @@ function App() {
             (die) => die.isHeld && die.value === dice[0].value
         );
         if (checkTenzies) {
+            // Get the final time
+            const finalTime = timestamp;
+            setEndTime(finalTime);
             open();
             setTenzies(true);
+        } else {
+            // Creating a second long interval
+            const interval = 1000;
+
+            // Get the difference between the start time and the end time in unix time
+            const diffTime = dayjs().unix() - startTime.unix();
+
+            // Setup the initial duration
+            let tenzieDuration = dayjs.duration(
+                diffTime * 1000,
+                'milliseconds'
+            );
+
+            // Update every second
+            const intervalId = setInterval(() => {
+                tenzieDuration = dayjs.duration(
+                    tenzieDuration.asMilliseconds() + interval,
+                    'milliseconds'
+                );
+                setTimeStamp(tenzieDuration);
+            }, interval);
+            return () => clearInterval(intervalId);
         }
-    }, [dice]);
+    }, [dice, timestamp]);
 
     // Roll all the dice that aren't currently being held
     function rollDice() {
+        if (numberOfRolls === 0) {
+            setStartTime(dayjs());
+        }
         if (!tenzies) {
             // Set the state of the application to rolling
             setRolling(true);
@@ -75,14 +114,15 @@ function App() {
                 setRolling(false);
             }, 1000);
         } else {
-            // Close the modal
-            close();
-
             // Reset the game
             setTenzies(false);
 
             // Get new dice
             setDice(allNewDice());
+
+            // Reset the timer
+            setStartTime(dayjs());
+            setEndTime(dayjs());
         }
     }
 
@@ -94,10 +134,18 @@ function App() {
                     close={close}
                     setModalOpen={setModalOpen}
                     numberOfRolls={numberOfRolls}
+                    timestamp={timestamp}
+                    tenzies={tenzies}
+                    endTime={endTime}
                     rollDice={rollDice}
                 />
             )}
-            <Navigation numberOfRolls={numberOfRolls} />
+            <Navigation
+                numberOfRolls={numberOfRolls}
+                timestamp={timestamp}
+                tenzies={tenzies}
+                endTime={endTime}
+            />
             {tenzies && <Confetti />}
             <main className="bg-secondary min-h-96 max-w-3xl my-5 mx-auto rounded flex flex-col gap-5 p-5">
                 <div>

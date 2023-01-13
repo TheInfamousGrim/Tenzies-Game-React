@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { faXmark } from '@fortawesome/pro-solid-svg-icons';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Components
 import Backdrop from '../Backdrop';
+
+// Utility functions
+import formattedTime from '../../utils/formattedTime';
 
 const dropIn = {
     hidden: {
@@ -26,10 +30,12 @@ const dropIn = {
     },
 };
 
-const ModalText = ({ numberOfRolls, timeToTenzie }) => (
+const ModalText = ({ numberOfRolls, timestamp, endTime, tenzies }) => (
     <div className="modal-text">
         <h3 className="uppercase font-bold">{`🎲 Number of Rolls: ${numberOfRolls.toString()}`}</h3>
-        <h3 className="uppercase font-bold">{`⏳ Time: ${numberOfRolls.toString()}`}</h3>
+        <h3 className="uppercase font-bold">{`⏳ Time: ${
+            tenzies ? formattedTime(endTime) : formattedTime(timestamp)
+        }`}</h3>
     </div>
 );
 
@@ -45,11 +51,11 @@ const ModalButton = ({ onClick, label }) => (
     </motion.button>
 );
 
-const Modal = ({ close, numberOfRolls, rollDice, setModalOpen }) => (
+const Modal = ({ close, numberOfRolls, timestamp }) => (
     <Backdrop onClick={close}>
         <motion.div
             className="h-96 min-h-96 w-96 m-auto p-1 rounded-xl flex flex-col justify-around items-center drop-shadow-2xl bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-rose-100 to-teal-100 z-50"
-            onClick={close}
+            onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
             variants={dropIn}
             initial="hidden"
             animate="visible"
@@ -72,7 +78,10 @@ const Modal = ({ close, numberOfRolls, rollDice, setModalOpen }) => (
                     </motion.button>
                 </div>
                 <div className="flex flex-col justify-center h-full text-xl">
-                    <ModalText numberOfRolls={numberOfRolls} />
+                    <ModalText
+                        numberOfRolls={numberOfRolls}
+                        timestamp={timestamp}
+                    />
                     <div className="flex justify-center">
                         <ModalButton
                             onClick={close}
@@ -81,7 +90,6 @@ const Modal = ({ close, numberOfRolls, rollDice, setModalOpen }) => (
                         />
                     </div>
                 </div>
-                <div className="" />
             </div>
         </motion.div>
     </Backdrop>

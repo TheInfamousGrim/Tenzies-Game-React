@@ -17,8 +17,7 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
         return classes.filter(Boolean).join(' ');
     }
 
-    function holdDice(e) {
-        const currentDieId = e.currentTarget.dataset.dieId;
+    function holdDice(currentDieId) {
         setDice((oldDice) =>
             oldDice.map((oldDie) =>
                 oldDie.id === currentDieId
@@ -55,6 +54,10 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             whileFocus={{ scale: 1.1 }}
+            onKeyUp={(e) => {
+                if (e.key === 'Enter')
+                    holdDice(e.currentTarget.firstElementChild.dataset.dieId);
+            }}
         >
             <FontAwesomeIcon
                 className={classNames(
@@ -64,7 +67,7 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
                 )}
                 icon={diceNumberString(diceNumber)}
                 data-die-id={dieId}
-                onClick={(e) => holdDice(e)}
+                onClick={(e) => holdDice(e.currentTarget.dataset.dieId)}
                 onKeyDown={(e) => console.log('hello')}
             />
             <p className="mt-4 text-base text-gray-300 sr-only">

@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "daisyui": "^2.46.1",
+    "dayjs": "^1.11.7",
     "eslint-config-wesbos": "^3.2.0",
     "framer-motion": "^8.2.4",
     "nanoid": "^4.0.0",
