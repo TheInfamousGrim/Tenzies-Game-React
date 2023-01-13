@@ -97,7 +97,7 @@ function App() {
                     rollDice={rollDice}
                 />
             )}
-            <Navigation />
+            <Navigation numberOfRolls={numberOfRolls} />
             {tenzies && <Confetti />}
             <main className="bg-secondary min-h-96 max-w-3xl my-5 mx-auto rounded flex flex-col gap-5 p-5">
                 <div>

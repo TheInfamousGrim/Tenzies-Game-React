@@ -51,7 +51,7 @@ export default function Die({ diceNumber, isHeld, setDice, dieId, isRolling }) {
     return (
         <motion.button
             type="button"
-            className="outline-transparent ring-transparent"
+            className="outline-transparent ring-transparent bg-red"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             whileFocus={{ scale: 1.1 }}
