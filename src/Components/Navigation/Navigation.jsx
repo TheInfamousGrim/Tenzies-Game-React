@@ -70,7 +70,7 @@ const menuItemsVariants = {
 
 const colors = ['#FF008C', '#D309E1', '#9C1AFF', '#7700FF', '#4400FF'];
 
-export function Navigation({ numberOfRolls, timestamp, endTime }) {
+export function Navigation({ numberOfRolls, timestamp }) {
     // State
     const [isOpen, toggleOpen] = useCycle(false, true);
 
@@ -137,12 +137,6 @@ export function Navigation({ numberOfRolls, timestamp, endTime }) {
                             <p>{`Time: ${formattedTime(timestamp)}`}</p>
                         </div>
                     )}
-                </motion.li>
-                <motion.li
-                    className="list-none mb-5"
-                    variants={menuItemsVariants}
-                >
-                    <Divider dividerText="High Scores" />
                 </motion.li>
             </motion.ul>
             <MenuToggle toggle={() => toggleOpen()} />

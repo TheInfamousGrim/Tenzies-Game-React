@@ -47,10 +47,6 @@ function App() {
         return diceNumberArray;
     }
 
-    // Create a timer that will measure how long it takes the user to get a Tenzie
-    // useMemo(() => {
-    // }, [timestamp]);
-
     // Check if the user has won the game
     useEffect(() => {
         // Returns true if every die isHeld and is equal
