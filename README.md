@@ -67,7 +67,7 @@ In order to run my site locally then please follow these steps:
 
 3. Clone this repository into your local repository.
 
-   - `git clone git@github.com:TheInfamousGrim/Progressive-Web-Application-Text-Editor.git`.
+   - `git clone git@github.com:TheInfamousGrim/Tenzies-Game-React.git`.
 
 4. Install the dependencies
 
@@ -144,7 +144,7 @@ Please follow the contribution guidelines!
 
 <img src="https://avatars.githubusercontent.com/u/89855075?v=4" alt="TheInfamousGrim">
 
-Any feedback please email [George Fincher](mailto:finchergeorge1@gmail.com)
+Any feedback please email [George Fincher](mailto:george@grimfunky.dev)
 
 ## Socials
 
