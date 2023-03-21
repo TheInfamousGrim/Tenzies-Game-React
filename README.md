@@ -140,7 +140,7 @@ Please follow the contribution guidelines!
 ## Feedback
 
 ![Ask Me Anything](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:finchergeorge1@gmail.com)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:george@grimfunky.dev)
 
 <img src="https://avatars.githubusercontent.com/u/89855075?v=4" alt="TheInfamousGrim">
 
