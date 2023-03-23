@@ -132,7 +132,7 @@ The technologies used for the development of this app were:
 
 ## Contribution Guidelines
 
-I'm open to have anyone jump in and contribute just message me on [twitter](https://twitter.com/VaporWhy)
+I'm open to have anyone jump in and contribute just message me on [twitter](https://twitter.com/grimfunk69)
 
 Please follow the contribution guidelines!
 [Guidelines for contributing](/code_of_conduct.md)
