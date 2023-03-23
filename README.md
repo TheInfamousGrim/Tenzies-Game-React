@@ -126,7 +126,7 @@ The technologies used for the development of this app were:
 
 ## License
 
-![License: MIT](https://img.shields.io/github/license/TheInfamousGrim/george-fincher-react-portfolio?color=yellow)
+![License: MIT](https://img.shields.io/github/license/TheInfamousGrim/Tenzies-Game-React?color=yellow)
 
 [MIT License](/LICENSE)
 
